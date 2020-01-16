@@ -1,0 +1,13 @@
+.SignUp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SignUp .btn {
+    align-self: flex-start;
+}
+
+.SignUp .form-group {
+    align-self: stretch;
+}

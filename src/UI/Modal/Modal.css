@@ -1,0 +1,18 @@
+.modal-backdrop {
+    z-index: 10;
+}
+.modal, 
+.modal input,
+.modal textarea,
+.modal button,
+.modal a {
+    font-size: 1.6rem;
+}
+.modal input,
+.modal label {
+    color: #101010;
+}
+
+.modal-content {
+    padding: 3rem 4rem;
+}
