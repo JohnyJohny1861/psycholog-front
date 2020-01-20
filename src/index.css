@@ -13,10 +13,8 @@ code {
 }
 
 :root {
-  --font-1: 'Roboto Slab', serif;
-  --font-2: 'Roboto Mono', monospace;
-  --font-3: 'Roboto Condensed', serif;
-  --font-4: 'Ibarra Real Nova', serif;
+  --font-1: 'Josefin Sans', sans-serif;
+  --font-2: 'Nunito', sans-serif;
 }
 
 *,
@@ -32,6 +30,7 @@ html {
   overflow-x: hidden;
   font-size: 62.5%;
   box-sizing: border-box;
+  font-family: var(--font-2);
 }
 html::-webkit-scrollbar {
   display: none;

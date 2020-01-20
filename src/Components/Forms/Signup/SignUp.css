@@ -1,4 +1,11 @@
+.Signup-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .SignUp {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,5 +16,14 @@
 }
 
 .SignUp .form-group {
+    position: relative;
     align-self: stretch;
+}
+
+.Signup_password-eye {
+    cursor: pointer;
+    position: absolute;
+    top: 35px;
+    right: 28px;
+    width: 18px;
 }

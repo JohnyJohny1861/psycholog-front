@@ -1,11 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './User.css';
-import userUrl from '../../../assets/user.svg';
-import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from '../../../store/actions';
 
-const User = ({user}) => {
+import userUrl from '../../../assets/user.svg';
+
+const User = ({user, login, fakeUser, modalHandler}) => {
     const {avatar, firstName, lastName, phoneNumber} = user;
 
+    const closeModalHandler = () => {
+        modalHandler(false)
+    }
+
+    const loginHandler = () => {
+        login(fakeUser);
+    }
     return (
         <div className="User card mx-auto w-75">
             <div className="card-body">
@@ -13,17 +22,24 @@ const User = ({user}) => {
                 <h2 className="card-title mb-3">Ism: {firstName}</h2>
                 <h2 className="card-title mb-3">Familiya: {lastName}</h2>
                 <h3 className="card-title mb-5">Telefon: {phoneNumber}</h3>
-                {
-                    window.localStorage.hasItem('token') ? (
-                        <Link to="/setting" className="btn btn-primary">Sozlash</Link>
-                    ) : (
-                        <Link to="/" className="btn btn-primary">Kirish</Link>
-                    )
-                }
-                
+                <button 
+                    onClick={closeModalHandler}
+                    className="btn btn-warning mr-3">Tamomlash</button>
+                <button 
+                    onClick={loginHandler}
+                    className="btn btn-primary">Kirish</button>  
             </div>
         </div>
     )
 }
 
-export default User
+const mapStateToProps = ({fakeUser, }) => ({
+    fakeUser
+})
+
+const mapDispatchToProps = dispatch => ({
+    login: (fakeUser) => dispatch(actions.login(fakeUser)),
+    modalHandler: (payload) => dispatch(actions.modalHandler(payload)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(User);

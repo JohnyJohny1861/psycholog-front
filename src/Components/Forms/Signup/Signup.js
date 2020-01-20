@@ -5,8 +5,10 @@ import * as actions from '../../../store/actions';
 
 import Loader from '../../../UI/Loader/Loader';
 import User from '../../Lists/User/User';
+import eyeUrl from '../../../assets/eye-show.svg';
+import hideUrl from '../../../assets/eye-hide.svg';
 
-const SignUp = (props) => {
+const SignUp = ({message, loading, errorMsg, fakeUser, sendSms, signup}) => {
     const [form, setForm] = useState({
         firstName: { 
             label: 'Ism',
@@ -33,19 +35,22 @@ const SignUp = (props) => {
             clsName: ''
         },
         smsCode: {
-            label: 'Sms kodni kiriting!',
+            label: 'Sms Kod',
             value: '',
             errorMsg: null,
             clsName: ''
         }
     });
+    const [passwordType, setPasswordType] = useState('password');
+
+    const passwordShow = () => setPasswordType(passwordType === 'password' ? 'text' : 'password');
     
     const submitHandler = (e) => {
         e.preventDefault();
         let err = false;
         let updatedForm = {...form};
         for(let key in form) {
-            if(!props.message && key === 'smsCode') continue;
+            if(!message && key === 'smsCode') continue;
             const f = form[key];
             if(f.value.length <= 0){
                 updatedForm = {
@@ -61,51 +66,64 @@ const SignUp = (props) => {
         }
         if(err) {
             setForm(updatedForm)
-        } else if (props.message) {
-            props.signup(form.smsCode.value);
+        } else if (message) {
+            signup(form.smsCode.value);
         } else {
-            props.sendSms(form) 
+            sendSms({
+                firstName: form.firstName.value,
+                lastName: form.lastName.value,
+                password: form.password.value,
+                phoneNumber: form.phoneNumber.value
+            }) 
         }
     }
 
     const inpChangeHandler = (e) => {
+        let hasError = false;
+        let errText = null;
+        if(e.target.value.length === 0) {
+            hasError = true;
+            errText = `${form[e.target.name].label} ni kiriting`
+        } else if(e.target.name === 'password') {
+            hasError = e.target.value.length < 6;
+            errText = `${form[e.target.name].label} 6 tadan kam bo'lmasligi kereak`
+        }
         setForm({
             ...form,
             [e.target.name]: {
                 ...form[e.target.name],
                 value: e.target.value,
-                errorMsg: e.target.value.length===0?`${form[e.target.name].label} ni kiriting`:null,
-                clsName: `is-${e.target.value.length === 0 ? 'in' : ''}valid`
+                errorMsg: hasError ? errText : null,
+                clsName: `is-${hasError ? 'in' : ''}valid`
             }
         })
     }
 
     return (
-        <div>
-            {
-                props.user ? (
-                    <User user={props.user}/>
+        <div className="Signup-wrapper">
+            {   
+                loading ? <Loader /> :
+                (fakeUser && !message) ? (
+                    <User user={fakeUser}/>
                 ) : (
                     <form className="SignUp" onSubmit={submitHandler} noValidate>
                     {
-                        props.loading ? <Loader /> :
-
-                        props.message ? (
+                        message ? (
                             <div className="form-group">
                                 <label htmlFor="smsCode">
-                                    {props.message || form.smsCode.label}
+                                    {message || form.smsCode.label}
                                 </label>
                                 <input 
                                     onChange={inpChangeHandler}
                                     value={form.smsCode.value}
                                     name="smsCode"
-                                    type="text"
+                                    type="number"
                                     className={
-                                        `form-control ${props.errorMsg ? 'is-invalid' : form.smsCode.clsName}`
+                                        `form-control ${errorMsg ? 'is-invalid' : form.smsCode.clsName}`
                                     }
                                     id="smsCode"/>
                                 <div className="invalid-feedback">
-                                    {props.errorMsg || form.smsCode.errorMsg}
+                                    {errorMsg ? errorMsg : form.smsCode.errorMsg}
                                 </div>
                             </div>
                         ) : 
@@ -142,7 +160,7 @@ const SignUp = (props) => {
                                 </div>
                             </div>
 
-                            <div className="form-group">
+                            <div className="form-group Signup_password-form-group">
                                 <label htmlFor={"signup-password"}>
                                     {form.password.label}
                                 </label>
@@ -150,9 +168,14 @@ const SignUp = (props) => {
                                     onChange={inpChangeHandler}
                                     value={form.password.value}
                                     name="password"
-                                    type="text" 
+                                    type={passwordType} 
                                     className={"form-control " + form.password.clsName}
                                     id={"signup-password"}/>
+                                <img 
+                                    onClick={passwordShow}
+                                    src={passwordType === "password" ? eyeUrl : hideUrl} 
+                                    alt="eye" 
+                                    className="Signup_password-eye"/>
                                 <div className="invalid-feedback">
                                     {form.password.errorMsg}
                                 </div>
@@ -168,11 +191,11 @@ const SignUp = (props) => {
                                     name="phoneNumber"
                                     type="text" 
                                     className={`form-control 
-                                    ${props.errorMsg ? 'is-invalid' : form.phoneNumber.clsName}`
+                                    ${errorMsg ? 'is-invalid' : form.phoneNumber.clsName}`
                                     }
                                     id={"signup-phoneNumber"}/>
                                 <div className="invalid-feedback">
-                                    {props.errorMsg || form.phoneNumber.errorMsg}
+                                    {errorMsg || form.phoneNumber.errorMsg}
                                 </div>
                             </div>
                         </>)
@@ -181,7 +204,7 @@ const SignUp = (props) => {
                     <button 
                         type="submit" 
                         className="btn btn-primary mt-5 py-2 px-4">
-                            {props.message ? 'Register' : "Sms Kodni jo'natish"}
+                            {message ? 'Register' : "Sms Kodni jo'natish"}
                     </button>
                 </form>
             
@@ -192,16 +215,16 @@ const SignUp = (props) => {
     )
 }
 
-const mapStateToProps = ({message, loading, errorMsg, user}) => ({
+const mapStateToProps = ({message, loading, errorMsg, fakeUser}) => ({
     message,
     loading,
     errorMsg,
-    user
+    fakeUser
 });
 
 const mapDispatchToProps = dispatch => ({
     sendSms: (form) => dispatch(actions.sendSms(form)),
-    signup: smsCode => dispatch(actions.signup(smsCode)),
+    signup: smsCode => dispatch(actions.signup(smsCode))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

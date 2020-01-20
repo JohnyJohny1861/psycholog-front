@@ -10,4 +10,13 @@
 
 .Login .form-group {
     align-self: stretch;
+    position: relative;
+}
+
+.Login_password-eye {
+    cursor: pointer;
+    position: absolute;
+    top: 36px;
+    right: 28px;
+    width: 18px;
 }

@@ -1,24 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Switch, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
+import  * as actions from './store/actions';
 
 import Body from './Containers/Body'
-import Navber from './Pages/Main/Navbar/Navbar';
-import Header from './Pages/Main/Header';
+import Navber from './Components/Navbar/Navbar';
+import Main from './Pages/Main/Main';
 import About from './Pages/About/Index';
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.getUser()
+  }, [props])
   return (
     <div className="App">
       <Navber />
       <Body>
         <Switch>
-          <Route path="/" exact component={Header} />
+          <Route path="/" exact component={Main} />
           <Route path="/about" exact component={About}/>
         </Switch>  
-
       </Body>
     </div>
   );
 }
 
-export default App;
+// const mapStateToProps = ({user}) => ({
+//   user
+// });
+
+const mapDispatchToProps = dispatch => ({
+  getUser: () => dispatch(actions.getUser())
+})
+
+export default connect(null, mapDispatchToProps)(App);

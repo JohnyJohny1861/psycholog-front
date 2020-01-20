@@ -5,10 +5,10 @@ import bg_1 from '../../../assets/1.jpg';
 import bg_2 from '../../../assets/2.jpg';
 import bg_3 from '../../../assets/3.jpg';
 
-import telegram from '../../../assets/telegram-64.png';
-import instagram from '../../../assets/instagram-64.png';
-import youtube from '../../../assets/youtube-64.png';
-import facebook from '../../../assets/facebook-64.png';
+import telegram from '../../../assets/social-1.png';
+import instagram from '../../../assets/social-2.png';
+import youtube from '../../../assets/social-3.png';
+import facebook from '../../../assets/social-4.png';
 
 const infos = {
     info_1: {

@@ -1,27 +1,27 @@
 import React, {useRef, useState, useEffect} from 'react';
 import './Navbar.css';
+import * as actions from '../../store/actions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 // Images
-import logoUrl from '../../../assets/logo-1.png';
-import userUrl from '../../../assets/user.svg';
-import cartUrl from '../../../assets/cart.svg';
-import settingUrl from '../../../assets/setting.svg';
-import logoutUrl from '../../../assets/logout-1.svg';
+import logoUrl from '../../assets/logo-1.png';
+import userUrl from '../../assets/user.svg';
+import cartUrl from '../../assets/cart.svg';
+import settingUrl from '../../assets/setting.svg';
+import logoutUrl from '../../assets/logout-1.svg';
 
 // COMPONENTS
-// import User from '../../../Components/Lists/User/User';
-import Modal from '../../../UI/Modal/Modal';
-import SigupForm from '../../../Components/Forms/Signup/Signup';
-import LoginForm from '../../../Components/Forms/Login/Login';
+// import User from '../../Components/Lists/User/User';
+import Modal from '../../UI/Modal/Modal';
+import SigupForm from '../../Components/Forms/Signup/Signup';
+import LoginForm from '../../Components/Forms/Login/Login';
 
 let timers = [];
 
 const Navbar = (props) => {
     const [canClick, setCanClick] = useState(false);
     const [mobile, setMobile] = useState(window.innerWidth < 786 ? true : false);
-    const [modalShow, setModalShow] = useState(false);
 
     const navbarRef = useRef(null);
     const collapseRef = useRef(null);
@@ -131,7 +131,7 @@ const Navbar = (props) => {
                         </Link>
                     </li>
                     
-                    {/* {props.user ? 
+                    {props.user ? 
                         <li className={`nav-item User-navItem ${!mobile && 'ml-auto'}`}>
                             <div className="btn-group">
                                 <button 
@@ -159,7 +159,7 @@ const Navbar = (props) => {
                                     </Link>
                                     <hr />
                                     <Link 
-                                        onClick={()=>{}}
+                                        onClick={()=>{props.logout()}}
                                         className="dropdown-item" 
                                         to="/">
                                             Logout
@@ -168,36 +168,38 @@ const Navbar = (props) => {
                                 </div>
                             </div>
                         </li>
-                    : */}
+                    :
                     <>
                         <li className={`nav-item ${!mobile && 'ml-auto'}`}>
                             <Link 
                                 data-toggle="modal" 
                                 data-target="#signup"
                                 className="nav-link signup" 
-                                onClick={() => setModalShow(true)}
+                                onClick={() => props.modalHandler(true)}
                                 to="/">Registratsiya
                             </Link>
                             <Modal 
                                 id="signup" 
                                 title="Registratsiya forma" 
-                                onClick={() => setModalShow(false)}
-                                body={modalShow && <SigupForm />}/>
+                                onClick={() => props.modalHandler(false)}
+                                body={props.modal && <SigupForm />}/>
                         </li>
                         <li className={`nav-item ${!mobile && 'mx-3'}`}>
                             <Link 
                                 data-toggle="modal" 
                                 data-target="#login"
                                 className="nav-link login" 
+                                onClick={() => props.modalHandler(true)}
                                 to="/">Kirish
                             </Link>
-                            {/* <Modal 
+                            <Modal 
                                 id="login" 
                                 title="Login forma" 
-                                body={<LoginForm />}/> */}
+                                onClick={() => props.modalHandler(false)}
+                                body={props.modal && <LoginForm />}/>
                         </li>
                     </>    
-                    {/* }            */}
+                    }        
                 </ul>
             </div>
         </nav>
@@ -206,10 +208,15 @@ const Navbar = (props) => {
 
   
 
-const mapStateToProps = ({user}) => ({
-    user
+const mapStateToProps = ({user, modal}) => ({
+    user,
+    modal
 });
 
+const mapDispatchToProps = dispatch => ({
+    modalHandler: (payload) => dispatch(actions.modalHandler(payload)),
+    logout: () => dispatch(actions.logout())
+})
 
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

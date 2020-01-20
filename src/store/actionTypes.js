@@ -2,5 +2,7 @@ export const types = {
     loading: 'LOADING',
     message: 'MESSAGE',
     errorMsg: 'ERROR MESSAGE',
-    user: 'USER'
+    user: 'USER',
+    fakeUser: 'FAKE USER',
+    toggleModal: 'TOGGLE MODAL'
 }

@@ -4,8 +4,10 @@ import './Login.css';
 import Loader from '../../../UI/Loader/Loader';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions';
+import eyeUrl from '../../../assets/eye-show.svg';
+import hideUrl from '../../../assets/eye-hide.svg';
 
-const Login = (props) => {
+const Login = ({loading, errorMsg, login}) => {
     const [form, setForm] = useState({
         phoneNumber: { 
             label: 'Telefon Nomeri',
@@ -20,6 +22,10 @@ const Login = (props) => {
             clsName: ''
         }
     });
+
+    const [passwordType, setPasswordType] = useState('password');
+
+    const passwordShow = () => setPasswordType(passwordType === 'password' ? 'text' : 'password');
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -42,7 +48,10 @@ const Login = (props) => {
         if(err) {
             setForm(updatedForm);
         } else {
-            props.login(form);
+            login({
+                phoneNumber: form.phoneNumber.value,
+                password: form.password.value
+            })
         }
     }
 
@@ -58,37 +67,66 @@ const Login = (props) => {
             }
         })
     }
-    let formGroups = [];
-    for(let key in form) {
-        const f = form[key];
-        formGroups.push(
-            <div className="form-group" key={f.label + new Date().getTime()}>
-                <label htmlFor={"login" + key}>{f.label}</label>
-                <input 
-                    onChange={inpChangeHandler}
-                    value={f.value}
-                    name={key}
-                    type={key === 'password' ? 'password' : 'text'} 
-                    className={"form-control " + f.clsName}
-                    id={"login" + key}/>
-                <div className="invalid-feedback">
-                    {f.errorMsg}
-                </div>
-            </div>
-        )
+
+    let errorPhone;
+    let errorPassword;
+    if(errorMsg) {
+        if(errorMsg.includes('Telefon')){
+            errorPhone = errorMsg;
+        } else {
+            errorPassword = errorMsg
+        }
     }
 
     return (
         <div>
             <form className="Login" onSubmit={submitHandler} noValidate>
                 {
-                    props.loading ? <Loader /> :
-                    formGroups
+                    loading ? <Loader /> :
+                    <>
+                        <div className="form-group">
+                            <label htmlFor="login phoneNumber">
+                                {form.phoneNumber.label}
+                            </label>
+                            <input 
+                                onChange={inpChangeHandler}
+                                value={form.phoneNumber.value}
+                                name="phoneNumber"
+                                type="text"
+                                className={
+                                    `form-control ${errorPhone ? 'is-invalid' : form.phoneNumber.clsName}`
+                                }
+                                id="login phoneNumber"/>
+                            <div className="invalid-feedback">
+                                {errorPhone ? errorPhone : form.phoneNumber.errorMsg}
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="login password">
+                                {form.password.label}
+                            </label>
+                            <input 
+                                onChange={inpChangeHandler}
+                                value={form.password.value}
+                                name="password"
+                                type={passwordType} 
+                                className={"form-control " + form.password.clsName}
+                                id={"login-password"}/>
+                            <img 
+                                onClick={passwordShow}
+                                src={passwordType === "password" ? eyeUrl : hideUrl} 
+                                alt="eye" 
+                                className="Login_password-eye"/>
+                            <div className="invalid-feedback">
+                                {errorPassword ? errorPassword : form.password.errorMsg}
+                            </div>
+                        </div>
+                    </>
                 }
                 <button 
                     type="submit" 
                     className="btn btn-primary mt-5 py-2 px-4">
-                        {props.message ? 'Kirish' : "Sms Kodni jo'natish"}
+                    Kirish
                 </button>
             </form>
         </div>
