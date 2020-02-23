@@ -1,0 +1,16 @@
+.Message_timer {
+    cursor: pointer;
+    color: var(--color-primary);
+    transition: all .1s linear;
+}
+
+.Message_timer:hover {
+    color: var(--color-3);
+}
+
+.Message_timer:focus,
+.Message_timer:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}

@@ -1,0 +1,79 @@
+.CM-toggler {
+    width: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 0;
+    visibility: hidden;
+    border: none !important;
+}
+
+.CM {
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+.CM-dialog {
+    margin-top: 5rem;
+    max-width: 80rem;
+}
+
+.CM-content {
+    padding: 10rem;
+    padding-top: 7rem;
+    margin: 0 !important;
+}
+
+.CM-header {
+    border-bottom: none;
+}
+
+.CM-title {
+    font-family: var(--font-1);
+    color: var(--color-primary);
+    width: 100%;
+    margin-top: 5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 3.2rem;
+}
+
+.CM-close {
+    margin-top: -4rem !important;
+    margin-right: -2rem !important;
+    font-family: var(--font-2);
+    font-size: 3rem;
+}
+
+.CM-icon {
+    width: 5rem;
+    margin-right: 1rem;
+}
+
+.CM-rateText {
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    font-family: var(--font-2);
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--color-grey-light-2);
+}
+
+.CM-text {
+    color: var(--color-secondary);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    word-spacing: 2px;
+    font-family: var(--font-2);
+    margin-top: 5rem;
+    font-size: 1.8rem;
+}
+.CM-text:focus {
+    color: #000;
+}
+
+
+.CM-footer {
+    border-top: none;
+}

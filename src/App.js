@@ -4,33 +4,50 @@ import {connect} from 'react-redux';
 import  * as actions from './store/actions';
 
 import Body from './Containers/Body'
-import Navber from './Components/Navbar/Navbar';
-import Main from './Pages/Main/Main';
-import About from './Pages/About/Index';
+import Navbar from './Components/Navbar/Navbar';
+import Footer from './Components/Footer/Footer';
+import Signup from './Components/Forms/Signup/SignupForm';
+import Login from './Components/Forms/Login/LoginForm';
 
-function App(props) {
+import Main from './Pages/Main/Main';
+import Courses from './Pages/Courses/Courses';
+import CoursePreview from './Pages/CoursePreview/CoursePreview';
+import CourseBought from './Pages/CourseBought/CourseBought';
+import MyCourses from './Pages/MyCourses/MyCourses';
+import Cart from './Pages/Cart/Cart';
+
+function App({getUser, getCategories}) {
   useEffect(() => {
-    props.getUser()
-  }, [props])
+    getUser();
+    getCategories();
+  }, [getUser, getCategories]);
   return (
     <div className="App">
-      <Navber />
+      <Navbar />
       <Body>
         <Switch>
           <Route path="/" exact component={Main} />
-          <Route path="/about" exact component={About}/>
+          <Route path="/signup" exact component={Signup}/>
+          <Route path="/login" exact component={Login}/>
+          <Route path="/courses" exact component={Courses}/>
+          <Route path="/course-preview/:id" exact component={CoursePreview}/>
+          <Route path="/course/:id" exact component={CourseBought}/>
+          <Route path="/my-courses" exact component={MyCourses}/>
+          <Route path="/cart" exact component={Cart}/>
         </Switch>  
       </Body>
+      <Footer />
     </div>
   );
 }
 
-// const mapStateToProps = ({user}) => ({
-//   user
-// });
+const mapStateToProps = ({user}) => ({
+  user
+});
 
 const mapDispatchToProps = dispatch => ({
-  getUser: () => dispatch(actions.getUser())
+  getUser: () => dispatch(actions.getUser()),
+  getCategories: () => dispatch(actions.getCategories())
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

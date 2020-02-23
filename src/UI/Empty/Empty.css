@@ -1,0 +1,22 @@
+.Empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Empty img {
+    width: 25rem;
+}
+
+.Empty h1 {
+    font-size: 3.2rem;
+    margin: 2rem 0;
+
+}
+
+.Empty a {
+    font-size: 2rem;
+    margin-top: 2rem;
+    padding: 2rem 3rem;
+    margin-bottom: 10rem;
+}

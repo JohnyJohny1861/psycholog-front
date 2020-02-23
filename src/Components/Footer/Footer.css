@@ -1,0 +1,31 @@
+.Footer-wrapper {
+    background-color: var(--color-secondary);
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.363);
+}
+
+.Footer {
+    padding: 2rem 0;
+    font-size: 1.4rem;
+    color: var(--color-grey-light-2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.Footer_companyname {
+    margin-right: 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.267);
+}
+
+.Footer_socials {
+    padding: 5px 10px;
+    display: flex;
+}
+
+.Footer_socials a, .Footer_socials img {
+    width: 2.5rem;
+    margin-right: 10px;
+    transition: transform .2s linear;
+}

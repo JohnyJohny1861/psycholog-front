@@ -1,0 +1,50 @@
+.CP-WYL {
+    background-color: var(--color-grey-light-1);
+    border: 1px solid #dedfe0;
+    padding: 1rem 1.5rem;
+    margin-top: 4rem;
+}
+
+.CP_title {
+    color: var(--color-primary-dark);
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+}
+
+.CP-WYL_items {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.CP-WYL_item {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.4rem;
+    width: 40%;
+}
+
+.CP-WYL_check {
+    align-self: flex-start;
+    color: #8a92a3;
+    margin-right: 1rem;
+    margin-top: 6px;
+    width: 14px;
+    height: 14px;
+}
+
+/* DESCRIPTION */
+.CP-DESC {
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    max-height: 26rem;
+    overflow: auto;
+}
+.CP-DESC_title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+}

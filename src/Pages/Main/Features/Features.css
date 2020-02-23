@@ -1,7 +1,7 @@
 .features {
   color: #101010;
   grid-column: center-start / center-end;
-  margin: calc(100vh + 15rem) auto;
+  margin: calc(100vh + 10rem) auto 10rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   grid-gap: 6rem;
@@ -23,5 +23,6 @@
     -webkit-transform: translateY(-1rem);
             transform: translateY(-1rem); }
   .feature__text {
+    font-family: var(--font-2);
     font-size: 1.7rem; }
   

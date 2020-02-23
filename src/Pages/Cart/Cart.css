@@ -1,0 +1,98 @@
+.Cart {
+    font-size: 1.6rem;
+}
+
+.Cart_bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 8rem;
+    min-height: 50rem;
+}
+
+.C_total {
+    font-weight: 400;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.C_course {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0,0,0, .2);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all .1s linear;
+}
+
+.C_course:hover{
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0, .5);
+}
+.C_course:active{
+    box-shadow: 0 1px 3px rgba(0,0,0, .5);
+}
+
+.C_posterImage {
+    width: 18rem;
+    border-radius: 5px;
+    margin-right: 1.2rem;
+}
+
+.C_title {
+    font-family: var(--font-1);
+    font-size: 1.8rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+}
+.C_category {
+    color: var(--color-3-dark);
+    font-size: 1.4rem;
+    font-family: var(--font-2);
+    margin-bottom: 2px;
+}
+.C_coursePrice {
+    font-family: var(--font-1);
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-grey-light-2);
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.C_delete {
+    margin-left: auto;
+    margin-right: 1rem;
+    padding: 1rem;
+}
+
+.C_delete:hover img {
+    transform: translateY(-2px);
+}
+.C_delete:active img {
+    transform: translateY(2px);
+}
+
+.C_delete img {
+    cursor: pointer;
+    width: 3.4rem;
+    transition: all .2s linear;
+}
+
+/* RIGHT SIDE */
+
+.C_Right {
+    display: flex;
+    flex-direction: column;
+}
+.C_totalPrice {
+    font-family: var(--font-1);
+    color: var(--color-secondary);
+    font-size: 3.9rem;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    margin: 2rem 0;
+}
+
+/* EMTYP CARY */

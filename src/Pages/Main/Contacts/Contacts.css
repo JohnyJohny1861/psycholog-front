@@ -1,0 +1,24 @@
+.Contacts,
+.Contacts input,
+.Contacts textarea {
+    font-size: 1.6rem;
+    font-family: var(--font-1);
+}
+
+.Contacts h1 {
+    font-size: 3.5rem;
+}
+
+#meet-staff {
+    background-color: var(--color-secondary);
+    padding: 5rem 0;
+}
+
+.Contancts-Submit {
+    background-color: var(--color-primary);
+    color: var(--color-grey-light-1);
+}
+
+.Contacts_map {
+    height: 36rem;
+}

@@ -1,8 +1,9 @@
 import React from 'react';
+import './Body.css';
 
 const Body = ({children}) => {
     return (
-        <div className="Body" style={{height: "1500px"}}>
+        <div className="Body">
             {children}
         </div>
     )

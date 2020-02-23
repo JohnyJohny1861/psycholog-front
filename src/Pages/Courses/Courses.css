@@ -1,0 +1,37 @@
+.CoursesPage {
+    width: 100vw;
+}
+
+.CoursePage_categories {
+    margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: var(--color-primary);
+}
+
+.CoursePage_categories-cat {
+    cursor: pointer;
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 1.2rem 1.6rem;
+    transition: all .1s linear;
+}
+.CoursePage_categories-cat:hover {
+    color: var(--color-primary-dark);
+}
+
+.CatActive {
+    color: var(--color-primary-dark);
+    position: relative;
+}
+.CatActive::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 1.5px;
+    background-color: var(--color-primary-dark);
+    bottom: 0;
+    left: 1.6rem;
+}

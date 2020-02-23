@@ -1,0 +1,9 @@
+.Login_forgot-password {
+    cursor: pointer;
+    color: var(--color-primary);
+    transition: all .1s linear;
+}
+
+.Login_forgot-password:hover {
+    color: var(--color-3);
+}

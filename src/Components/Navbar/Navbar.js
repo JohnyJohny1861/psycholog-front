@@ -4,18 +4,10 @@ import * as actions from '../../store/actions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
+import User from './User/User';
+import MyCourses from './MyCourses/MyCourses';
 // Images
-import logoUrl from '../../assets/logo-1.png';
-import userUrl from '../../assets/user.svg';
-import cartUrl from '../../assets/cart.svg';
-import settingUrl from '../../assets/setting.svg';
-import logoutUrl from '../../assets/logout-1.svg';
-
-// COMPONENTS
-// import User from '../../Components/Lists/User/User';
-import Modal from '../../UI/Modal/Modal';
-import SigupForm from '../../Components/Forms/Signup/Signup';
-import LoginForm from '../../Components/Forms/Login/Login';
+import logoUrl from '../../assets/logo.png';
 
 let timers = [];
 
@@ -73,7 +65,6 @@ const Navbar = (props) => {
             window.innerWidth < 768 && 
             canClick && 
             !elClasses.contains('toggled-nav') &&
-            !elClasses.contains('dropdown-toggle') &&
             !elClasses.contains('User-navItem')) {
             toggledNavRef.current.classList.add('fadeOutLeftBig', 'animated');
             timers.push(
@@ -86,7 +77,7 @@ const Navbar = (props) => {
         }
     }
     return (
-        <nav className="navbar navbar-dark navbar-expand-md sticky-top" ref={navbarRef}>
+        <nav id="nav" className="navbar navbar-dark navbar-expand-md sticky-top" ref={navbarRef}>
             <Link 
                 className="navbar-brand" 
                 to="/">
@@ -107,96 +98,43 @@ const Navbar = (props) => {
                 <ul 
                     className={`navbar-nav ${mobile && 'toggled-nav'}`} 
                     ref={toggledNavRef}>
-                    {window.innerWidth < 768 &&
-                    <li className="nav-item">
-                        <Link 
-                            className="navbar-brand " 
-                            to="/">
-                            <img 
-                                src={logoUrl} 
-                                alt="logo" 
-                                className="navbar-logo"/>
-                        </Link>
-                    </li>}
-                    <li className="nav-item ml-5">
-                        <Link 
-                            className="nav-link" 
-                            to="/courses">Video Kurslar 
-                        </Link>
-                    </li>
-                    <li className="nav-item ml-3">
-                        <Link 
-                            className="nav-link" 
-                            to="/about">H.Yulduzxon haqida
-                        </Link>
-                    </li>
-                    
-                    {props.user ? 
-                        <li className={`nav-item User-navItem ${!mobile && 'ml-auto'}`}>
-                            <div className="btn-group">
-                                <button 
-                                    type="button" 
-                                    className="btn dropdown-toggle" 
-                                    data-toggle="dropdown" 
-                                    aria-haspopup="true" 
-                                    aria-expanded="false">
-                                    <img 
-                                        className="img-fluid" 
-                                        src={userUrl} alt="user" />
-                                </button>
-                                <div className="dropdown-menu">
-                                    <Link 
-                                        className="dropdown-item" 
-                                        to="/cart">
-                                            Savatcha 
-                                            <img className="ml-2" src={cartUrl} alt="cart" />
-                                    </Link>
-                                    <Link 
-                                        className="dropdown-item" 
-                                        to="/setting">
-                                            Sozlash 
-                                            <img className="ml-2 py-1" src={settingUrl} alt="setting" />
-                                    </Link>
-                                    <hr />
-                                    <Link 
-                                        onClick={()=>{props.logout()}}
-                                        className="dropdown-item" 
-                                        to="/">
-                                            Logout
-                                            <img className="ml-2 py-1" src={logoutUrl} alt="setting" />
-                                    </Link>
-                                </div>
-                            </div>
+
+                    {mobile &&
+                        <li className="nav-item">
+                            <Link 
+                                className="navbar-brand " 
+                                to="/">
+                                <img 
+                                    src={logoUrl} 
+                                    alt="logo" 
+                                    className="navbar-logo"/>
+                            </Link>
                         </li>
+                    }
+                    <li className={`nav-item ${!mobile ? 'ml-5' : 'my-4'}`}>
+                        <Link 
+                            className="nav-link" 
+                            to="/courses">Video darslar 
+                        </Link>
+                    </li>
+                    {props.user ? 
+                    <>
+                        <MyCourses mobile={mobile} user={props.user}/>
+                        <User mobile={mobile} logout={props.logout} user={props.user}/>
+                    </>
                     :
                     <>
                         <li className={`nav-item ${!mobile && 'ml-auto'}`}>
                             <Link 
-                                data-toggle="modal" 
-                                data-target="#signup"
                                 className="nav-link signup" 
-                                onClick={() => props.modalHandler(true)}
-                                to="/">Registratsiya
+                                to="/signup">Registratsiya
                             </Link>
-                            <Modal 
-                                id="signup" 
-                                title="Registratsiya forma" 
-                                onClick={() => props.modalHandler(false)}
-                                body={props.modal && <SigupForm />}/>
                         </li>
                         <li className={`nav-item ${!mobile && 'mx-3'}`}>
                             <Link 
-                                data-toggle="modal" 
-                                data-target="#login"
                                 className="nav-link login" 
-                                onClick={() => props.modalHandler(true)}
-                                to="/">Kirish
+                                to="/login">Kirish
                             </Link>
-                            <Modal 
-                                id="login" 
-                                title="Login forma" 
-                                onClick={() => props.modalHandler(false)}
-                                body={props.modal && <LoginForm />}/>
                         </li>
                     </>    
                     }        
@@ -204,9 +142,7 @@ const Navbar = (props) => {
             </div>
         </nav>
     )
-}
-
-  
+} 
 
 const mapStateToProps = ({user, modal}) => ({
     user,
@@ -214,7 +150,6 @@ const mapStateToProps = ({user, modal}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    modalHandler: (payload) => dispatch(actions.modalHandler(payload)),
     logout: () => dispatch(actions.logout())
 })
 

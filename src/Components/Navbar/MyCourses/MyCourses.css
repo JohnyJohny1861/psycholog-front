@@ -1,0 +1,105 @@
+.MyCourses-navItem .dropdown-toggle {
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+.MyCourses-navItem .dropdown-toggle:focus {
+    box-shadow: none;
+}
+.MyCourses-navItem .dropdown-toggle:after {
+    color: var(--color-grey-light-1);
+    font-size: 1.2rem;
+}
+
+.MyCourses-navItem .dropdown-menu {
+    overflow-y: scroll;
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: 700;
+    width: 33rem;
+    max-height: 33rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    background-color: var(--color-secondary);
+    right: 0;
+    left: initial;
+}
+
+.MyCourses-navItem .dropdown-item {
+    padding: 2rem;
+    display: flex;
+}
+
+.MyCourses-navItem .dropdown-item:hover,
+.MyCourses-navItem .dropdown-item:focus {
+    background-color: transparent;
+}
+
+.MyCourses-navItem .btn-group {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.MyCourses_left {
+    position: relative;
+}
+
+.MyCourses_posterImage {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+}
+.MyCourses_play {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+    padding-left: 8px;
+    background-color: #fff;
+    width: 3rem;
+    height: 3rem;
+    border: 1.5px solid var(--color-primary);
+    border-radius: 50%;
+    transition: all .2s;
+}
+.MyCourses-navItem .dropdown-item:hover .MyCourses_play {
+    opacity: 1;
+    visibility: visible;
+}
+
+.MyCourses_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1.6rem;
+    max-width: 21rem;
+}
+
+.MyCourses_title {
+    color: var(--color-primary);
+    text-align: left;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.MyCourses_category {
+    color: var(--color-3-dark);
+    margin-bottom: 0;
+    text-align: left;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.2rem;
+    font-weight: 400;
+}

@@ -1,0 +1,25 @@
+.Pagination {
+    font-size: 2rem;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.page-link {
+    cursor: pointer;
+    color: var(--color-3);
+    padding: 1rem 2rem;
+
+    transition: all .1s linear;
+}
+
+.pageActive {
+    color: var(--color-3-dark);
+    background-color: var(--color-secondary);
+}
+
+.pageActive:hover {
+    color: var(--color-3-dark);
+    background-color: var(--color-secondary);
+    border: 1px solid transparent;
+}

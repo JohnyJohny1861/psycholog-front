@@ -1,0 +1,21 @@
+.Main_Courses {
+    /* min-height: 35rem; */
+    margin: 0 auto;
+}
+
+.Main_Courses-title {
+    position: relative;
+    display: inline-block;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400;
+}
+
+.Main_Courses-title::after {
+    content: '';
+    position: absolute;
+    width: 12rem;
+    height: 1.5px;
+    background-color: var(--color-primary);
+    bottom: -.3rem;
+    left: 0;
+}

@@ -1,0 +1,7 @@
+.MyCourses {
+    min-height: calc(300px + 31.5rem);
+}
+.MC_courses {
+    margin: 15rem 0;
+    min-height: calc(300px + 1.5rem);
+}
