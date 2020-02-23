@@ -13,7 +13,7 @@ const Pagination = ({total, setPage, page}) => {
                 onClick={() => clickHandler(i)}
                 className="page-item" 
                 key={i * new Date().getTime()}>
-                <a href="#cats" className={`page-link ${page === i ? 'pageActive': ''}`}>{i}</a>
+                <a href="#nav" className={`page-link ${page === i ? 'pageActive': ''}`}>{i}</a>
             </li>
         )
     }
@@ -23,7 +23,7 @@ const Pagination = ({total, setPage, page}) => {
                 <li 
                     className="page-item mr-3" 
                     onClick={() => clickHandler((page - 1) > 0 ? page - 1 : page)}>
-                    <a href="#cats" className="page-link">Previous</a>
+                    <a href="#nav" className="page-link">Previous</a>
                 </li>
 
                 {pageLinks}
@@ -31,7 +31,7 @@ const Pagination = ({total, setPage, page}) => {
                 <li
                     onClick={() => clickHandler((page + 1) <= total ? page + 1 : page)} 
                     className="page-item ml-3">
-                    <a href="#cats" className="page-link">Next</a>
+                    <a href="#nav" className="page-link">Next</a>
                 </li>
             </ul>
         </nav>

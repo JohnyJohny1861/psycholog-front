@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const baseURL = 'http://localhost:8080/';
 const instance = axios.create({
-    baseURL
+    baseURL: baseURL + 'api/'
 });
 
 export default instance
