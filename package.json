@@ -11,6 +11,7 @@
     "query-string": "^6.10.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-input-mask": "^2.0.4",
     "react-player": "^1.15.2",
     "react-rating": "^2.0.4",
     "react-redux": "^7.1.3",

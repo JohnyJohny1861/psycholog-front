@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './bootstrap/bootstrap.css';
+// import './bootstrap/bootstrap.js';
 import 'animate.css';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Loader from '../../../../UI/Loader/Loader';
+import InputMask from 'react-input-mask';
 
 export default ({errorMsg, setForgotPage, forgotSendSms, loading, setLoading}) => {
     const [form, setForm] = useState({
@@ -34,21 +35,33 @@ export default ({errorMsg, setForgotPage, forgotSendSms, loading, setLoading}) =
             console.log('err')
             setForm(updatedForm);
         } else {
+            const phoneNumber = form.phoneNumber.value
+                .replace("+(998)", "+998")
+                .split(" ")
+                .join("")
             forgotSendSms({
-                phoneNumber: form.phoneNumber.value
+                phoneNumber
             })
         }
     }
 
     const inpChangeHandler = (e) => {
-        const inp = e.target
+        let hasError = false;
+        let errText = null;
+        if(e.target.value.length === 0) {
+            hasError = true;
+            errText = `Telefon nomerini kiriting`
+        } else if(e.target.name === 'phoneNumber') {
+            hasError = e.target.value.includes("_");
+            errText = ``
+        }
         setForm({
             ...form,
-            [inp.name]: {
-                ...form[inp.name],
-                value: inp.value,
-                errorMsg: inp.value.length===0?`${form[inp.name].label} ni kiriting`:null,
-                clsName: `is-${e.target.value.length === 0 ? 'in' : ''}valid`
+            [e.target.name]: {
+                ...form[e.target.name],
+                value: e.target.value,
+                errorMsg: hasError ? errText : null,
+                clsName: `is-${hasError ? 'in' : ''}valid`
             }
         })
     }
@@ -71,15 +84,17 @@ export default ({errorMsg, setForgotPage, forgotSendSms, loading, setLoading}) =
                         <label htmlFor="login phoneNumber">
                             {form.phoneNumber.label}
                         </label>
-                        <input 
+                        <InputMask 
                             onChange={inpChangeHandler}
                             value={form.phoneNumber.value}
+                            placeholder="+(998) __ ___ __ __"
                             name="phoneNumber"
                             type="text"
                             className={
                                 `form-control ${errorMsg ? 'is-invalid' : form.phoneNumber.clsName}`
                             }
-                            id="login phoneNumber"/>
+                            mask="+(\9\98) 99 999 99 99" 
+                            maskChar="_" />
                         <div className="invalid-feedback">
                             {errorMsg || form.phoneNumber.errorMsg}
                         </div>

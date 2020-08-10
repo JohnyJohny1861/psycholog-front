@@ -15,6 +15,7 @@ import CoursePreview from './Pages/CoursePreview/CoursePreview';
 import CourseBought from './Pages/CourseBought/CourseBought';
 import MyCourses from './Pages/MyCourses/MyCourses';
 import Cart from './Pages/Cart/Cart';
+import Setting from './Pages/Setting/Setting';
 
 function App({getUser, getCategories}) {
   useEffect(() => {
@@ -34,6 +35,7 @@ function App({getUser, getCategories}) {
           <Route path="/course/:id" exact component={CourseBought}/>
           <Route path="/my-courses" exact component={MyCourses}/>
           <Route path="/cart" exact component={Cart}/>
+          <Route path="/setting" exact component={Setting}/>
         </Switch>  
       </Body>
       <Footer />

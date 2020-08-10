@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import InputMask from 'react-input-mask';
 
 import eyeUrl from '../../../../assets/eye-show.svg';
 import hideUrl from '../../../../assets/eye-hide.svg';
@@ -44,7 +45,10 @@ const Signup = ({errorMsg, sendSms, loading}) => {
             errText = `${form[e.target.name].label} ni kiriting`
         } else if(e.target.name === 'password') {
             hasError = e.target.value.length < 6;
-            errText = `${form[e.target.name].label} 6 tadan kam bo'lmasligi kereak`
+            errText = ``
+        } else if(e.target.name === 'phoneNumber') {
+            hasError = e.target.value.includes("_");
+            errText = ``
         }
         setForm({
             ...form,
@@ -78,11 +82,15 @@ const Signup = ({errorMsg, sendSms, loading}) => {
         if(err) {
             setForm(updatedForm)
         } else {
+            const phoneNumber = form.phoneNumber.value
+                .replace("+(998)", "+998")
+                .split(" ")
+                .join("");
             sendSms({
                 firstName: form.firstName.value,
                 lastName: form.lastName.value,
                 password: form.password.value,
-                phoneNumber: form.phoneNumber.value
+                phoneNumber
             }) 
         }
     }
@@ -154,15 +162,17 @@ const Signup = ({errorMsg, sendSms, loading}) => {
                             <label htmlFor={"signup-phoneNumber"}>
                                 {form.phoneNumber.label}
                             </label>
-                            <input 
+                            <InputMask 
+                                placeholder="+(998) __ ___ __ __"
+                                mask="+(\9\98) 99 999 99 99" 
+                                maskChar="_"
                                 onChange={inpChangeHandler}
                                 value={form.phoneNumber.value}
                                 name="phoneNumber"
-                                type="text" 
                                 className={`form-control 
                                 ${errorMsg ? 'is-invalid' : form.phoneNumber.clsName}`
                                 }
-                                id={"signup-phoneNumber"}/>
+                                id={"signup-phoneNumber"} />
                             <div className="invalid-feedback">
                                 {errorMsg || form.phoneNumber.errorMsg}
                             </div>

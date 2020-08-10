@@ -101,7 +101,7 @@ html {
 .custom-btn:hover,
 .custom-btn-2:active,
 .custom-btn-2:hover {
-  color: var(--color-secondary);
+  color: #fff4f4;
   text-decoration: none;
 }
 .custom-btn {

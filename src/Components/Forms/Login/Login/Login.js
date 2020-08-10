@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './Login.css';
+import InputMask from 'react-input-mask';
 
 import Loader from '../../../../UI/Loader/Loader';
 
@@ -42,12 +43,13 @@ const Login = ({errorMsg, login, setForgotPage, loading, setLoading}) => {
                 err = true;
             }
         }
+        const phoneNumber = form.phoneNumber.value.replace("+(998)", "+998").split(" ").join("")
 
         if(err || form.password.value.length < 6) {
             setForm(updatedForm);
         } else {
             login({
-                phoneNumber: form.phoneNumber.value,
+                phoneNumber,
                 password: form.password.value
             });
         }
@@ -61,7 +63,10 @@ const Login = ({errorMsg, login, setForgotPage, loading, setLoading}) => {
             errText = `${form[e.target.name].label} ni kiriting`
         } else if(e.target.name === 'password') {
             hasError = e.target.value.length < 6;
-            errText = `${form[e.target.name].label} 6 tadan kam bo'lmasligi kereak`
+            errText = ``
+        } else if(e.target.name === 'phoneNumber') {
+            hasError = e.target.value.includes("_");
+            errText = ``
         }
         setForm({
             ...form,
@@ -103,14 +108,16 @@ const Login = ({errorMsg, login, setForgotPage, loading, setLoading}) => {
                         <label htmlFor="login-phoneNumber">
                             {form.phoneNumber.label}
                         </label>
-                        <input 
-                            onChange={inpChangeHandler}
-                            value={form.phoneNumber.value}
-                            name="phoneNumber"
-                            type="text"
+                        <InputMask 
+                            placeholder="+(998) __ ___ __ __"
+                            mask="+(\9\98) 99 999 99 99" 
+                            maskChar="_" 
                             className={
                                 `form-control ${errorPhone ? 'is-invalid' : form.phoneNumber.clsName}`
                             }
+                            onChange={inpChangeHandler}
+                            value={form.phoneNumber.value}
+                            name="phoneNumber"
                             id="login-phoneNumber"/>
                         <div className="invalid-feedback">
                             {errorPhone ? errorPhone : form.phoneNumber.errorMsg}
